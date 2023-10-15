@@ -1,1 +1,1 @@
-export {default as AdminExample} from "./TS";
+export { default as AdminExample } from "./TS";

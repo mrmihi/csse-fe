@@ -1,1 +1,1 @@
-export {default as StaffExample} from "./TS";
+export { default as StaffExample } from "./TS";

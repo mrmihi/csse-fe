@@ -3,7 +3,7 @@ name: CI staging deploy
 on:
   push:
     branches:
-      - main
+      - development
 jobs:
   deploy:
     name: Deploy to staging
