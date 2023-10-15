@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 function StaffSidebar() {
-  const [isEcommerceExpanded, setIsEcommerceExpanded] = useState(false);
+  const [isOrderExpanded, setIsOrderExpanded] = useState(false);
 
-  const toggleEcommerceDropdown = () => {
-    setIsEcommerceExpanded(!isEcommerceExpanded);
+  const toggleOrderExpandDropdown = () => {
+    setIsOrderExpanded(!isOrderExpanded);
   };
 
   return (
@@ -41,8 +42,8 @@ function StaffSidebar() {
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             <li>
-              <a
-                href="#"
+              <Link
+                to="/staff"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -56,7 +57,7 @@ function StaffSidebar() {
                   <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                 </svg>
                 <span className="ml-3">Dashboard</span>
-              </a>
+              </Link>
             </li>
             <li>
               <Button
@@ -64,7 +65,7 @@ function StaffSidebar() {
                 className="bg-gray-100 flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                 aria-controls="dropdown-example"
                 data-collapse-toggle="dropdown-example"
-                onClick={toggleEcommerceDropdown}
+                onClick={toggleOrderExpandDropdown}
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
@@ -76,7 +77,7 @@ function StaffSidebar() {
                   <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
                 </svg>
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                  E-commerce
+                  Approval Management
                 </span>
                 <svg
                   className="w-3 h-3"
@@ -97,32 +98,24 @@ function StaffSidebar() {
               <ul
                 id="dropdown-example"
                 className={`py-2 space-y-2 ${
-                  isEcommerceExpanded ? "block" : "hidden"
+                  isOrderExpanded ? "block" : "hidden"
                 }`}
               >
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/staff/orders"
                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
-                    Products
-                  </a>
+                    Orders
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/staff/requisition"
                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
-                    Billing
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                  >
-                    Invoice
-                  </a>
+                    Requisitions
+                  </Link>
                 </li>
               </ul>
             </li>
