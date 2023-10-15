@@ -4,25 +4,23 @@ import {
   Example
 } from "../pages";
 import {
-  StaffExample,
   AdminExample,
   SupplierExample
 } from "../dashboards"
+import { StaffPage } from "@/dashboards/staff";
 
 
 const AnimatedRoutes = () => {
   const location = useLocation();
   return (
-
       <Routes location={location}>
         <Route path= "*" element={<Login />} />
         <Route path= "/login" element={<Login />} />
         <Route path= "/example" element={<Example />} />
         <Route path= "/supplier" element={<SupplierExample />} />
         <Route path= "/admin" element={<AdminExample />} />
-        <Route path= "/staff" element={<StaffExample />} />
+        <Route path= "/staff" element={<StaffPage />} />
       </Routes>
-
   );
 };
 
