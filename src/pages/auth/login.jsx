@@ -26,7 +26,7 @@ export function Login() {
       <TabsContent value="account">
         <Card>
           <CardHeader>
-            <CardTitle>Account</CardTitle>
+            <CardTitle>Log In</CardTitle>
             <CardDescription>
               Make changes to your account here. Click save when you're done.
             </CardDescription>
