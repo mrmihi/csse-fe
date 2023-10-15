@@ -10,8 +10,8 @@ const AnimatedRoutes = () => {
   return (
 
       <Routes location={location}>
-        <Route path="/csse-fe/login" element={<Login />} />
-        <Route path="/csse-fe/example" element={<Example />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/example" element={<Example />} />
       </Routes>
 
   );
