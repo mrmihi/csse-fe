@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Login, Example } from "../pages";
-import { StaffExample, AdminExample, SupplierExample } from "../dashboards";
+import { StaffExample, AdminExample, Supplier } from "../dashboards";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -9,7 +9,7 @@ const AnimatedRoutes = () => {
       <Route path="*" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/example" element={<Example />} />
-      <Route path="/supplier" element={<SupplierExample />} />
+      <Route path="/supplier" element={<Supplier />} />
       <Route path="/admin" element={<AdminExample />} />
       <Route path="/staff" element={<StaffExample />} />
     </Routes>
