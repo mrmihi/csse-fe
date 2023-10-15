@@ -1,5 +1,4 @@
-import "./App.css";
-import { default as AnimatedRoutes } from "@/routes/index.jsx";
+import { default as AnimatedRoutes } from "@/routes";
 
 function App() {
   return (
