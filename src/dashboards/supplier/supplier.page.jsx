@@ -4,6 +4,7 @@ import SupplierDeliveryTable from "./supplierDeliveryTable";
 import { Sidebar } from "./sideBar";
 import { Menu } from "./menu";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import DashboardPage from "./main/page";
 
 const Supplier = () => {
   // const [activeTable, setActiveTable] = useState("orders");
@@ -28,9 +29,7 @@ const Supplier = () => {
                           Orders
                         </TabsTrigger>
                         <TabsTrigger value="deliveries">Deliveries</TabsTrigger>
-                        <TabsTrigger value="live" disabled>
-                          Live
-                        </TabsTrigger>
+                        <TabsTrigger value="live">Live</TabsTrigger>
                       </TabsList>
                       <div className="ml-auto mr-4">
                         <Button>
@@ -50,6 +49,12 @@ const Supplier = () => {
                       className="h-full flex-col border-none p-0 data-[state=active]:flex"
                     >
                       <SupplierDeliveryTable />
+                    </TabsContent>
+                    <TabsContent
+                      value="live"
+                      className="h-full flex-col border-none p-0 data-[state=active]:flex"
+                    >
+                      <DashboardPage />
                     </TabsContent>
                   </Tabs>
                 </div>
