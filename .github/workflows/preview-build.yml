@@ -1,0 +1,37 @@
+name: Build PR preview
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - development
+
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-preview:
+    name: Build preview
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository 🛎️
+        uses: actions/checkout@v3
+
+      - name: Build 🏗️
+        uses: ./.github/actions/build
+        env:
+          VITE_BASHAWAY_BE_URL: ${{ secrets.STAGING_BASHAWAY_BE_URL }}
+          VITE_FIREBASE_CONFIG: ${{ secrets.STAGING_FIREBASE_CONFIG }}
+          VITE_AZURE_UPLOAD_SAS_TOKEN: ${{ secrets.STAGING_AZURE_UPLOAD_SAS_TOKEN }}
+          VITE_AZURE_DOWNLOAD_SAS_TOKEN: ${{ secrets.STAGING_AZURE_DOWNLOAD_SAS_TOKEN }}
+          VITE_AZURE_STORAGE_ACCOUNT: ${{ secrets.STAGING_AZURE_STORAGE_ACCOUNT }}
+          VITE_AZURE_STORAGE_CONTAINER: ${{ secrets.STAGING_AZURE_STORAGE_CONTAINER }}
+          VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          VITE_APP_ENV: staging
+
+      - name: Upload build files 📤
+        uses: sliit-foss/actions/preview-deployments/postbuild@main

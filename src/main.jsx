@@ -1,10 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
+import { BrowserRouter } from "react-router-dom";
+import { default as App } from "@/App";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const Root = () => {
+  let basename = "/";
+
+  const matchPreviewDeployment = window.location.pathname.match(/preview\/pr-\d+/);
+
+  if (matchPreviewDeployment) {
+    basename += matchPreviewDeployment[0];
+  }
+
+  return (
+    <React.StrictMode>
+      <BrowserRouter basename={basename}>
+        <App />
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<Root />);
