@@ -3,6 +3,11 @@ import {
   Login,
   Example
 } from "../pages";
+import {
+  StaffExample,
+  AdminExample,
+  SupplierExample
+} from "../dashboards"
 
 
 const AnimatedRoutes = () => {
@@ -10,8 +15,12 @@ const AnimatedRoutes = () => {
   return (
 
       <Routes location={location}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/example" element={<Example />} />
+        <Route path= "*" element={<Login />} />
+        <Route path= "/login" element={<Login />} />
+        <Route path= "/example" element={<Example />} />
+        <Route path= "/supplier" element={<SupplierExample />} />
+        <Route path= "/admin" element={<AdminExample />} />
+        <Route path= "/staff" element={<StaffExample />} />
       </Routes>
 
   );
