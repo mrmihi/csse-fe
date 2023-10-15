@@ -1,1 +1,1 @@
-export {default as SupplierExample} from "./TS";
+export { default as SupplierExample } from "./TS";

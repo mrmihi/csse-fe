@@ -16,7 +16,7 @@ jobs:
         uses: ./.github/actions/build
         env:
           VITE_APP_ENV: staging
-      
+
       - name: Fix base URL 🔧
         run: sed -i "s/.\/assets/\/assets/" dist/index.html
 

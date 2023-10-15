@@ -1,3 +1,3 @@
-export {default as Example} from "./TS";
+export { default as Example } from "./TS";
 
 export * from "./auth";
