@@ -73,7 +73,11 @@ export function Example() {
 
   const getCommonEditTextFieldProps = useCallback(
     (
+<<<<<<< HEAD
       cell: MRT_Cell<Person>
+=======
+      cell: MRT_Cell<Person>,
+>>>>>>> 00c1858bf99a0288206632d2ed4b2d97b92365b1
     ): MRT_ColumnDef<Person>["muiTableBodyCellEditTextFieldProps"] => {
       return {
         error: !!validationErrors[cell.id],
