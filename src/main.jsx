@@ -5,17 +5,17 @@ import { BrowserRouter } from "react-router-dom";
 import { default as App } from "@/App";
 
 const Root = () => {
-  let basename = "/";
+  // let basename = "/";
 
-  const matchPreviewDeployment = window.location.pathname.match(/preview\/pr-\d+/);
+  // const matchPreviewDeployment = window.location.pathname.match(/preview\/pr-\d+/);
 
-  if (matchPreviewDeployment) {
-    basename += matchPreviewDeployment[0];
-  }
+  // if (matchPreviewDeployment) {
+  //   basename += matchPreviewDeployment[0];
+  // }
 
   return (
     <React.StrictMode>
-      <BrowserRouter basename={basename}>
+      <BrowserRouter>
         <App />
       </BrowserRouter>
     </React.StrictMode>
