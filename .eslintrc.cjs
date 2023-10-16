@@ -22,6 +22,7 @@ module.exports = {
       "react/no-unescaped-entities": "off",
       "no-unused-vars": "off",
       "react/no-unknown-property": "off",
+      "react/no-unknown-property": "off",
   },
 }
 

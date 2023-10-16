@@ -19,28 +19,28 @@ export function Menu() {
   return (
     <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
       <MenubarMenu>
-        <MenubarTrigger className="font-bold">Music</MenubarTrigger>
+        <MenubarTrigger className="font-bold"> Concrete Inc</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>About Music</MenubarItem>
+          <MenubarItem>About Concrete</MenubarItem>
           <MenubarSeparator />
           <MenubarItem>
             Preferences... <MenubarShortcut>⌘,</MenubarShortcut>
           </MenubarItem>
           <MenubarSeparator />
           <MenubarItem>
-            Hide Music... <MenubarShortcut>⌘H</MenubarShortcut>
+            Hide Concrete... <MenubarShortcut>⌘H</MenubarShortcut>
           </MenubarItem>
           <MenubarItem>
             Hide Others... <MenubarShortcut>⇧⌘H</MenubarShortcut>
           </MenubarItem>
           <MenubarShortcut />
           <MenubarItem>
-            Quit Music <MenubarShortcut>⌘Q</MenubarShortcut>
+            Quit Concrete <MenubarShortcut>⌘Q</MenubarShortcut>
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger className="relative">File</MenubarTrigger>
+      {/* <MenubarMenu>
+        <MenubarTrigger className="relative">Org</MenubarTrigger>
         <MenubarContent>
           <MenubarSub>
             <MenubarSubTrigger>New</MenubarSubTrigger>
@@ -99,7 +99,7 @@ export function Menu() {
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
-        <MenubarTrigger>Edit</MenubarTrigger>
+        <MenubarTrigger>About</MenubarTrigger>
         <MenubarContent>
           <MenubarItem disabled>
             Undo <MenubarShortcut>⌘Z</MenubarShortcut>
@@ -178,21 +178,21 @@ export function Menu() {
             Enter Full Screen
           </MenubarItem>
         </MenubarContent>
-      </MenubarMenu>
+      </MenubarMenu> */}
       <MenubarMenu>
         <MenubarTrigger className="hidden md:block">Account</MenubarTrigger>
         <MenubarContent forceMount>
-          <MenubarLabel inset>Switch Account</MenubarLabel>
+          <MenubarLabel inset>Profile</MenubarLabel>
           <MenubarSeparator />
-          <MenubarRadioGroup value="benoit">
+          {/* <MenubarRadioGroup value="benoit">
             <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
             <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
             <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-          </MenubarRadioGroup>
-          <MenubarSeparator />
+          </MenubarRadioGroup> */}
+          {/* <MenubarSeparator />
           <MenubarItem inset>Manage Famliy...</MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem inset>Add Account...</MenubarItem>
+          <MenubarSeparator /> */}
+          <MenubarItem inset>Log Out</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
