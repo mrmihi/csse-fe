@@ -7,7 +7,7 @@ const StaffPage = () => {
         <div>
           <StaffSidebar />
         </div>
-        <div className="col-span-3 lg:col-span-5 lg:border-l mt-10 mr-10">
+        <div className="col-span-3 lg:col-span-5 mt-10 mr-10">
           <h1>Hello World from staff page</h1>
         </div>
       </div>
