@@ -4,8 +4,10 @@ const OrderStats = ({ title, description }) => {
   return (
     <>
       <Card>
-        <CardHeader>{title}</CardHeader>
-        <CardDescription className="pb-5">{description}</CardDescription>
+        <CardHeader className="text-center">{title}</CardHeader>
+        <CardDescription className="pb-5 text-center">
+          {description}
+        </CardDescription>
       </Card>
     </>
   );

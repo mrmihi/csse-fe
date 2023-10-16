@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -10,46 +9,34 @@ import {
 
 const invoices = [
   {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
+    itemId: "1",
+    name: "Cement",
+    totalAmount: "LKR 2500.00",
+    quantity: 8,
   },
   {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
+    itemId: "2",
+    name: "Glass",
+    totalAmount: "LKR 1500.00",
+    quantity: 7,
   },
   {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
+    itemId: "3",
+    name: "Pipes",
+    totalAmount: "LKR 3500.00",
+    quantity: 4,
   },
   {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
+    itemId: "4",
+    name: "Wires",
+    totalAmount: "4500.00",
+    quantity: 1,
   },
   {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
+    itemId: "5",
+    name: "Nuts",
+    totalAmount: "LKR 550.00",
+    quantity: 8,
   },
 ];
 
@@ -57,12 +44,11 @@ const OrderViewTable = () => {
   return (
     <div className="mt-5">
       <Table style={{ width: "70%", margin: "0 auto" }}>
-        <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[200px]">Invoice</TableHead>
-            <TableHead className="text-left">Status</TableHead>
-            <TableHead className="text-left">Method</TableHead>
+            <TableHead className="w-[200px]">Item ID</TableHead>
+            <TableHead className="text-left">Name</TableHead>
+            <TableHead className="text-left">Quantity</TableHead>
             <TableHead className="text-right">Amount</TableHead>
           </TableRow>
         </TableHeader>
@@ -70,14 +56,10 @@ const OrderViewTable = () => {
           {invoices.map((invoice) => (
             <TableRow key={invoice.invoice}>
               <TableCell className="font-medium text-left">
-                {invoice.invoice}
+                {invoice.itemId}
               </TableCell>
-              <TableCell className="text-left">
-                {invoice.paymentStatus}
-              </TableCell>
-              <TableCell className="text-left">
-                {invoice.paymentMethod}
-              </TableCell>
+              <TableCell className="text-left">{invoice.name}</TableCell>
+              <TableCell className="text-left">{invoice.quantity}</TableCell>
               <TableCell className="text-right">
                 {invoice.totalAmount}
               </TableCell>

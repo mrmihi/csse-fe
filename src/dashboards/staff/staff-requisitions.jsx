@@ -19,10 +19,10 @@ const StaffRequisition = () => {
         <div>
           <StaffSidebar />
         </div>
-        <div className="col-span-3 lg:col-span-5 lg:border-l mt-10 mr-10">
+        <div className="col-span-3 lg:col-span-5 mt-10 mr-10">
           <div>
             <Tabs defaultValue="account" className="w-[1080px]">
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-3 justify-center">
                 <TabsTrigger value="pending" onClick={showPendingTable}>
                   Pending
                 </TabsTrigger>
