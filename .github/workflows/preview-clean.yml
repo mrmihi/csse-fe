@@ -2,7 +2,7 @@ name: Clean PR preview
 
 on:
   workflow_run:
-    workflows: ['Close PR']
+    workflows: ["Close PR"]
     types:
       - completed
 
