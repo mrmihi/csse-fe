@@ -4,7 +4,7 @@ const StaffPage = () => {
   return (
     <>
       <StaffSidebar />
-      <h1>Hello World</h1>
+      <h1>Hello World from staff page</h1>
     </>
   );
 };

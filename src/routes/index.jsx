@@ -16,9 +16,9 @@ const AnimatedRoutes = () => {
       <Route path="/supplier" element={<SupplierExample />} />
       <Route path="/admin" element={<AdminExample />} />
       <Route path="/staff" element={<StaffPage />} />
-      <Route path="/staff/orders" element={<StaffOrders />}/>
-      <Route path="/staff/requisition" element={<StaffRequisition />}/>
-      <Route path="/staff/requisition/:id" element={<StaffRequisitionView />}/>
+      <Route path="/staff/orders" element={<StaffOrders />} />
+      <Route path="/staff/requisition" element={<StaffRequisition />} />
+      <Route path="/staff/requisition/:id" element={<StaffRequisitionView />} />
     </Routes>
   );
 };

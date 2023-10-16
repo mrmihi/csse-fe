@@ -1,16 +1,19 @@
 import { useParams } from "react-router-dom";
 import StaffSidebar from "./components/sidebar";
+import PageTitle from "./components/page-title";
+import OrderViewTable from "./components/orders/order-view-table";
 
 const StaffRequisitionView = () => {
-    const {id} = useParams();
+  const { id } = useParams();
 
-    return (
-        <>
-            <StaffSidebar />
-            <h1>View Requisition</h1>
-            <p>Requisition ID: {id}</p>
-        </>
-    );
-}
+  return (
+    <>
+      <StaffSidebar />
+      <PageTitle title={"View Requisition- More Details"} />
+      <p>Requisition ID: {id}</p>
+      <OrderViewTable />
+    </>
+  );
+};
 
 export default StaffRequisitionView;

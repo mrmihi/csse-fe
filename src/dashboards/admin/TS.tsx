@@ -68,7 +68,7 @@ export function Example() {
       tableData.splice(row.index, 1);
       setTableData([...tableData]);
     },
-    [tableData]
+    [tableData],
   );
 
   const getCommonEditTextFieldProps = useCallback(
@@ -101,7 +101,7 @@ export function Example() {
         },
       };
     },
-    [validationErrors]
+    [validationErrors],
   );
 
   const columns = useMemo<MRT_ColumnDef<Person>[]>(
@@ -160,7 +160,7 @@ export function Example() {
         },
       },
     ],
-    [getCommonEditTextFieldProps]
+    [getCommonEditTextFieldProps],
   );
 
   return (
@@ -233,7 +233,7 @@ export const CreateNewAccountModal = ({
     columns.reduce((acc, column) => {
       acc[column.accessorKey ?? ""] = "";
       return acc;
-    }, {} as any)
+    }, {} as any),
   );
 
   const handleSubmit = () => {
@@ -283,7 +283,7 @@ const validateEmail = (email: string) =>
   email
     .toLowerCase()
     .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
 const validateAge = (age: number) => age >= 18 && age <= 50;
 export default Example;
