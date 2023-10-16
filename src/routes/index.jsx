@@ -1,12 +1,9 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { Login, Example } from "../pages";
-import { AdminExample, SupplierExample, StaffExample, AdminExample, Supplier, StaffPage  } from "../dashboards";
+import { AdminExample, Supplier, StaffPage } from "../dashboards";
 import StaffOrders from "@/dashboards/staff/staff-orders";
 import StaffRequisition from "@/dashboards/staff/staff-requisitions";
 import StaffRequisitionView from "@/dashboards/staff/staff-requisition-view";
-
-
-
 
 const AnimatedRoutes = () => {
   const location = useLocation();
