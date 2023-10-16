@@ -20,6 +20,7 @@ module.exports = {
       "react-refresh/only-export-components": "off",
       "react/prop-types": "off",
       "react/no-unescaped-entities": "off",
+      "no-unused-vars": "off",
       "react/no-unknown-property": "off",
   },
 };

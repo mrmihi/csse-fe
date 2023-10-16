@@ -1,4 +1,4 @@
-import { Person } from "./TS";
+import { Person } from "./supplierDeliveryTable";
 
 export const data: Person[] = [
   {
