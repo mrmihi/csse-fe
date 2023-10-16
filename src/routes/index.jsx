@@ -4,6 +4,8 @@ import { AdminExample, Supplier, StaffPage } from "../dashboards";
 import StaffOrders from "@/dashboards/staff/staff-orders";
 import StaffRequisition from "@/dashboards/staff/staff-requisitions";
 import StaffRequisitionView from "@/dashboards/staff/staff-requisition-view";
+import StaffPayment from "@/dashboards/staff/staff-payment.jsx";
+import StaffPaymentView from "@/dashboards/staff/staff-payment-view.jsx";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -15,6 +17,8 @@ const AnimatedRoutes = () => {
       <Route path="/supplier" element={<Supplier />} />
       <Route path="/admin" element={<AdminExample />} />
       <Route path="/staff" element={<StaffPage />} />
+      <Route path="/staff/payment" element={<StaffPayment />} />
+      <Route path="/staff/payment/:id" element={<StaffPaymentView />} />
       <Route path="/staff/orders" element={<StaffOrders />} />
       <Route path="/staff/requisition" element={<StaffRequisition />} />
       <Route path="/staff/requisition/:id" element={<StaffRequisitionView />} />
