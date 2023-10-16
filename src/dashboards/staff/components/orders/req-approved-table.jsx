@@ -12,49 +12,49 @@ const data = [
       firstName: "John",
       lastName: "Doe",
     },
-    address: "261 Erdman Ford",
-    city: "East Daphne",
-    state: "Kentucky",
+    supplier: "XYZ Electronics",
+    date: "2021 Jan 21",
+    totalAmount: "LKR 250000",
   },
   {
     id: 2,
     name: {
-      firstName: "Jane",
-      lastName: "Doe",
+      firstName: "Alice",
+      lastName: "Smith",
     },
-    address: "769 Dominic Grove",
-    city: "Columbus",
-    state: "Ohio",
+    supplier: "ABC Tech",
+    date: "2022 Feb 15",
+    totalAmount: "LKR 175000",
   },
   {
     id: 3,
     name: {
-      firstName: "Joe",
-      lastName: "Doe",
+      firstName: "Bob",
+      lastName: "Johnson",
     },
-    address: "566 Brakus Inlet",
-    city: "South Linda",
-    state: "West Virginia",
+    supplier: "Tech Solutions",
+    date: "2020 Dec 10",
+    totalAmount: "LKR 120000",
   },
   {
     id: 4,
     name: {
-      firstName: "Kevin",
-      lastName: "Vandy",
+      firstName: "Emily",
+      lastName: "Davis",
     },
-    address: "722 Emie Stream",
-    city: "Lincoln",
-    state: "Nebraska",
+    supplier: "Gadget World",
+    date: "2019 Nov 5",
+    totalAmount: "LKR 310000",
   },
   {
     id: 5,
     name: {
-      firstName: "Joshua",
-      lastName: "Rolluffs",
+      firstName: "Michael",
+      lastName: "Wilson",
     },
-    address: "32188 Larkin Turnpike",
-    city: "Charleston",
-    state: "South Carolina",
+    supplier: "ElectroMart",
+    date: "2023 Mar 3",
+    totalAmount: "LKR 98000",
   },
 ];
 
@@ -62,7 +62,7 @@ const RequisitionApprovedOrder = () => {
   const columns = useMemo(
     () => [
       {
-        accessorKey: "name.firstName", //access nested data with dot notation
+        accessorKey: "name.firstName",
         header: "First Name",
         size: 150,
       },
@@ -72,18 +72,18 @@ const RequisitionApprovedOrder = () => {
         size: 150,
       },
       {
-        accessorKey: "address", //normal accessorKey
-        header: "Address",
+        accessorKey: "supplier",
+        header: "Supplier",
         size: 200,
       },
       {
-        accessorKey: "city",
-        header: "City",
+        accessorKey: "date",
+        header: "Date",
         size: 150,
       },
       {
-        accessorKey: "state",
-        header: "State",
+        accessorKey: "totalAmount",
+        header: "Total Amount",
         size: 150,
       },
     ],
