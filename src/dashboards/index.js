@@ -1,3 +1,3 @@
 export * from "./supplier";
-export * from "./staff/staff-page";
+export * from "./staff";
 export * from "./admin";
