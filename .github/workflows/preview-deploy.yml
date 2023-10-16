@@ -21,4 +21,4 @@ jobs:
       - name: Deploy preview 🚀
         uses: sliit-foss/actions/preview-deployments/deploy@main
         with:
-          site_domain: portal.staging.bashaway.sliitfoss.org
+          site_domain: csse.mrmihi.live
