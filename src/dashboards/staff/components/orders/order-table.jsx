@@ -1,87 +1,64 @@
-import { useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
-
-const data = [
-  {
-    name: {
-      firstName: "John",
-      lastName: "Doe",
-    },
-    address: "261 Erdman Ford",
-    city: "East Daphne",
-    state: "Kentucky",
-  },
-  {
-    name: {
-      firstName: "Jane",
-      lastName: "Doe",
-    },
-    address: "769 Dominic Grove",
-    city: "Columbus",
-    state: "Ohio",
-  },
-  {
-    name: {
-      firstName: "Joe",
-      lastName: "Doe",
-    },
-    address: "566 Brakus Inlet",
-    city: "South Linda",
-    state: "West Virginia",
-  },
-  {
-    name: {
-      firstName: "Kevin",
-      lastName: "Vandy",
-    },
-    address: "722 Emie Stream",
-    city: "Lincoln",
-    state: "Nebraska",
-  },
-  {
-    name: {
-      firstName: "Joshua",
-      lastName: "Rolluffs",
-    },
-    address: "32188 Larkin Turnpike",
-    city: "Charleston",
-    state: "South Carolina",
-  },
-];
+import SupplierService from "@/services/supplier";
 
 const StaffOrderTable = () => {
+  const [autoApprovedRequests, setAutoApprovedRequests] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await SupplierService.getAllAutoApprovedOrders();
+      if (response.status === 200) {
+        setAutoApprovedRequests(response.data.results);
+      } else {
+        console.error("Error fetching data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const columns = useMemo(
     () => [
       {
-        accessorKey: "name.firstName", //access nested data with dot notation
+        accessorKey: "placedBy.firstName",
         header: "First Name",
         size: 150,
       },
       {
-        accessorKey: "name.lastName",
+        accessorKey: "placedBy.lastName",
         header: "Last Name",
         size: 150,
       },
       {
-        accessorKey: "address", //normal accessorKey
-        header: "Address",
+        accessorKey: "placedTo.name",
+        header: "Supplier",
         size: 200,
       },
       {
-        accessorKey: "city",
-        header: "City",
+        accessorKey: "placedTo.location",
+        header: "Location",
         size: 150,
       },
       {
-        accessorKey: "state",
-        header: "State",
+        accessorKey: "createdAt",
+        header: "Date",
+        size: 150,
+      },
+      {
+        accessorKey: "totalAmount",
+        header: "Total Amount",
         size: 150,
       },
     ],
     [],
   );
 
-  return <MaterialReactTable columns={columns} data={data} />;
+  return <MaterialReactTable columns={columns} data={autoApprovedRequests} />;
 };
 
 export default StaffOrderTable;
