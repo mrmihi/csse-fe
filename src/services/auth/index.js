@@ -1,18 +1,23 @@
 import axios from "axios";
-const baseUrl = "/api/login";
+import { Buffer } from "buffer";
+const baseUrl = "http://144.126.219.21:8001/api/v1/auth/signin";
+
+function parseJwt(token) {
+  return JSON.parse(Buffer.from(token.split(".")[1], "base64").toString());
+}
 
 async function login(username, password) {
   try {
     const response = await axios.post(baseUrl, {
-      username: username,
+      email: username,
       password: password,
     });
 
     if (response.status >= 200 && response.status < 300) {
-      const user = response.data;
+      const user = response.data.results[0];
 
-      localStorage.setItem("authToken", user.authToken);
-      localStorage.setItem("userRole", user.role);
+      localStorage.setItem("authToken", user.token);
+      localStorage.setItem("userRole", parseJwt(user.token).role);
 
       return user;
     } else {
