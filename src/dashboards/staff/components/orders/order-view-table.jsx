@@ -7,40 +7,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const invoices = [
-  {
-    itemId: "1",
-    name: "Cement",
-    totalAmount: "LKR 2500.00",
-    quantity: 8,
-  },
-  {
-    itemId: "2",
-    name: "Glass",
-    totalAmount: "LKR 1500.00",
-    quantity: 7,
-  },
-  {
-    itemId: "3",
-    name: "Pipes",
-    totalAmount: "LKR 3500.00",
-    quantity: 4,
-  },
-  {
-    itemId: "4",
-    name: "Wires",
-    totalAmount: "4500.00",
-    quantity: 1,
-  },
-  {
-    itemId: "5",
-    name: "Nuts",
-    totalAmount: "LKR 550.00",
-    quantity: 8,
-  },
-];
+const OrderViewTable = ({ items }) => {
+  const totalAmount = items.reduce((total, item) => total + item.amount, 0);
 
-const OrderViewTable = () => {
   return (
     <div className="mt-5">
       <Table style={{ width: "70%", margin: "0 auto" }}>
@@ -53,18 +22,22 @@ const OrderViewTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
+          {items.map((item) => (
+            <TableRow key={item.id}>
               <TableCell className="font-medium text-left">
-                {invoice.itemId}
+                {item.item.itemId}
               </TableCell>
-              <TableCell className="text-left">{invoice.name}</TableCell>
-              <TableCell className="text-left">{invoice.quantity}</TableCell>
-              <TableCell className="text-right">
-                {invoice.totalAmount}
-              </TableCell>
+              <TableCell className="text-left">{item.item.itemName}</TableCell>
+              <TableCell className="text-left">{item.quantity}</TableCell>
+              <TableCell className="text-right">{item.amount}</TableCell>
             </TableRow>
           ))}
+          <TableRow>
+            <TableCell className="font-medium text-left"></TableCell>
+            <TableCell className="text-left"></TableCell>
+            <TableCell className="text-left">Total Amount</TableCell>
+            <TableCell className="text-right">{totalAmount}</TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </div>

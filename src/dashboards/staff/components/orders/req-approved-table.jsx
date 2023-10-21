@@ -1,83 +1,50 @@
-import { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { MaterialReactTable } from "material-react-table";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import OrderStatsSection from "./order-stats-section";
 import PageTitle from "../page-title";
-
-const data = [
-  {
-    id: 1,
-    name: {
-      firstName: "John",
-      lastName: "Doe",
-    },
-    supplier: "XYZ Electronics",
-    date: "2021 Jan 21",
-    totalAmount: "LKR 250000",
-  },
-  {
-    id: 2,
-    name: {
-      firstName: "Alice",
-      lastName: "Smith",
-    },
-    supplier: "ABC Tech",
-    date: "2022 Feb 15",
-    totalAmount: "LKR 175000",
-  },
-  {
-    id: 3,
-    name: {
-      firstName: "Bob",
-      lastName: "Johnson",
-    },
-    supplier: "Tech Solutions",
-    date: "2020 Dec 10",
-    totalAmount: "LKR 120000",
-  },
-  {
-    id: 4,
-    name: {
-      firstName: "Emily",
-      lastName: "Davis",
-    },
-    supplier: "Gadget World",
-    date: "2019 Nov 5",
-    totalAmount: "LKR 310000",
-  },
-  {
-    id: 5,
-    name: {
-      firstName: "Michael",
-      lastName: "Wilson",
-    },
-    supplier: "ElectroMart",
-    date: "2023 Mar 3",
-    totalAmount: "LKR 98000",
-  },
-];
+import SupplierService from "@/services/supplier";
+import { Button } from "@/components/ui/button";
 
 const RequisitionApprovedOrder = () => {
+  const [approvedOrders, setApprovedOrders] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await SupplierService.getAllApprovedOrders();
+      if (response.status === 200) {
+        setApprovedOrders(response.data.results);
+      } else {
+        console.error("Error fetching data:", response.status);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const columns = useMemo(
     () => [
       {
-        accessorKey: "name.firstName",
+        accessorKey: "placedBy.firstName",
         header: "First Name",
         size: 150,
       },
       {
-        accessorKey: "name.lastName",
+        accessorKey: "placedBy.lastName",
         header: "Last Name",
         size: 150,
       },
       {
-        accessorKey: "supplier",
+        accessorKey: "placedTo.name",
         header: "Supplier",
         size: 200,
       },
       {
-        accessorKey: "date",
+        accessorKey: "placedAt",
         header: "Date",
         size: 150,
       },
@@ -96,7 +63,7 @@ const RequisitionApprovedOrder = () => {
       <OrderStatsSection />
       <MaterialReactTable
         columns={columns}
-        data={data}
+        data={approvedOrders}
         enableRowActions
         positionActionsColumn="last"
         renderRowActions={({ row }) => (
@@ -108,12 +75,11 @@ const RequisitionApprovedOrder = () => {
             }}
           >
             <Link to={`/staff/requisition/${row.original.id}`}>
-              <Button className="bg-green-600">View</Button>
+              <Button className="bg-blue-600">View</Button>
             </Link>
           </div>
         )}
       />
-      <Button className="float-left mt-2">Generate Income Report</Button>
     </>
   );
 };
