@@ -4,13 +4,13 @@ import { MaterialReactTable } from "material-react-table";
 import { data } from "./makeData";
 
 const SupplierOrderTable = () => {
-  const averageSalary = useMemo(
-    () => data.reduce((acc, curr) => acc + curr.salary, 0) / data.length,
+  const avarageAmount = useMemo(
+    () => data.reduce((acc, curr) => acc + curr.amount, 0) / data.length,
     [],
   );
 
-  const maxAge = useMemo(
-    () => data.reduce((acc, curr) => Math.max(acc, curr.age), 0),
+  const maxItems = useMemo(
+    () => data.reduce((acc, curr) => Math.max(acc, curr.items), 0),
     [],
   );
 
@@ -18,16 +18,16 @@ const SupplierOrderTable = () => {
     () => [
       {
         header: "Company",
-        accessorKey: "firstName",
+        accessorKey: "company",
         enableGrouping: false, //do not let this column be grouped
       },
       {
         header: "Site Manger",
-        accessorKey: "lastName",
+        accessorKey: "siteManager",
       },
       {
         header: "Items",
-        accessorKey: "age",
+        accessorKey: "items",
         aggregationFn: "max", //show the max age in the group (lots of pre-built aggregationFns to choose from)
         //required to render an aggregated cell
         AggregatedCell: ({ cell, table }) => (
@@ -44,13 +44,13 @@ const SupplierOrderTable = () => {
         Footer: () => (
           <Stack>
             Max Items:
-            <Box color="warning.main">{Math.round(maxAge)}</Box>
+            <Box color="warning.main">{Math.round(maxItems)}</Box>
           </Stack>
         ),
       },
       {
         header: "Address",
-        accessorKey: "gender",
+        accessorKey: "address",
         //optionally, customize the cell render when this column is grouped. Make the text blue and pluralize the word
         GroupedCell: ({ cell, row }) => (
           <Box sx={{ color: "primary.main" }}>
@@ -60,11 +60,11 @@ const SupplierOrderTable = () => {
       },
       {
         header: "Location",
-        accessorKey: "state",
+        accessorKey: "location",
       },
       {
         header: "Amount",
-        accessorKey: "salary",
+        accessorKey: "amount",
         aggregationFn: "mean",
         //required to render an aggregated cell, show the average salary in the group
         AggregatedCell: ({ cell, table }) => (
@@ -96,7 +96,7 @@ const SupplierOrderTable = () => {
           <Stack>
             Average Amount:
             <Box color="warning.main">
-              {averageSalary?.toLocaleString?.("en-US", {
+              {avarageAmount?.toLocaleString?.("en-US", {
                 style: "currency",
                 currency: "USD",
                 minimumFractionDigits: 0,
@@ -107,7 +107,7 @@ const SupplierOrderTable = () => {
         ),
       },
     ],
-    [averageSalary, maxAge],
+    [avarageAmount, maxItems],
   );
 
   return <MaterialReactTable columns={columns} data={data} enableExpanding />;

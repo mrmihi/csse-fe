@@ -1,17 +1,95 @@
 import { useMemo } from "react";
 import { Box, Stack } from "@mui/material";
 import { MaterialReactTable } from "material-react-table";
-import { data } from "./makeData";
+import { data } from "./makeDeliveryData";
 import { MenuItem } from "@mui/material";
+import { useCallback, useState } from "react";
 
 const SupplierDeliveryTable = () => {
-  const averageSalary = useMemo(
-    () => data.reduce((acc, curr) => acc + curr.salary, 0) / data.length,
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [tableData, setTableData] = useState(() => data);
+  const [validationErrors, setValidationErrors] = useState({});
+
+  const handleCreateNewRow = (values) => {
+    tableData.push(values);
+    setTableData([...tableData]);
+  };
+
+  const handleSaveRowEdits = async ({ exitEditingMode, row, values }) => {
+    if (!Object.keys(validationErrors).length) {
+      tableData[row.index] = values;
+      //send/receive api updates here, then refetch or update local table data for re-render
+      setTableData([...tableData]);
+      exitEditingMode(); //required to exit editing mode and close modal
+    }
+  };
+
+  const handleCancelRowEdits = () => {
+    setValidationErrors({});
+  };
+
+  const handleDeleteRow = useCallback(
+    (row) => {
+      if (
+        !confirm(`Are you sure you want to delete ${row.getValue("delivery")}`)
+      ) {
+        return;
+      }
+      //send api delete request here, then refetch or update local table data for re-render
+      tableData.splice(row.index, 1);
+      setTableData([...tableData]);
+    },
+    [tableData],
+  );
+
+  const getCommonEditTextFieldProps = useCallback(
+    (cell) => {
+      return {
+        error: !!validationErrors[cell.id],
+        helperText: validationErrors[cell.id],
+        onBlur: (event) => {
+          const isValid =
+            cell.column.id === "email"
+              ? validateEmail(event.target.value)
+              : cell.column.id === "age"
+              ? validateAge(+event.target.value)
+              : validateRequired(event.target.value);
+          if (!isValid) {
+            //set validation error for cell if invalid
+            setValidationErrors({
+              ...validationErrors,
+              [cell.id]: `${cell.column.columnDef.header} is required`,
+            });
+          } else {
+            //remove validation error for cell if valid
+            delete validationErrors[cell.id];
+            setValidationErrors({
+              ...validationErrors,
+            });
+          }
+        },
+      };
+    },
+    [validationErrors],
+  );
+
+  const validateRequired = (value) => !!value.length;
+  const validateEmail = (email) =>
+    !!email.length &&
+    email
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      );
+  const validateAge = (age) => age >= 18 && age <= 50;
+
+  const averageAmount = useMemo(
+    () => data.reduce((acc, curr) => acc + curr.amount, 0) / data.length,
     [],
   );
 
-  const maxAge = useMemo(
-    () => data.reduce((acc, curr) => Math.max(acc, curr.age), 0),
+  const maxItems = useMemo(
+    () => data.reduce((acc, curr) => Math.max(acc, curr.items), 0),
     [],
   );
 
@@ -19,21 +97,21 @@ const SupplierDeliveryTable = () => {
     () => [
       {
         header: "Company",
-        accessorKey: "firstName",
+        accessorKey: "company",
         enableGrouping: false, //do not let this column be grouped
       },
       {
-        header: "Last Name",
-        accessorKey: "lastName",
+        header: "Delivery",
+        accessorKey: "delivery",
       },
       {
         header: "Items",
-        accessorKey: "age",
+        accessorKey: "items",
         aggregationFn: "max", //show the max age in the group (lots of pre-built aggregationFns to choose from)
         //required to render an aggregated cell
         AggregatedCell: ({ cell, table }) => (
           <>
-            Oldest by{" "}
+            Latest Delivery{" "}
             {table.getColumn(cell.row.groupingColumnId ?? "").columnDef.header}:{" "}
             <Box
               sx={{ color: "info.main", display: "inline", fontWeight: "bold" }}
@@ -45,13 +123,13 @@ const SupplierDeliveryTable = () => {
         Footer: () => (
           <Stack>
             Max Items:
-            <Box color="warning.main">{Math.round(maxAge)}</Box>
+            <Box color="warning.main">{Math.round(maxItems)}</Box>
           </Stack>
         ),
       },
       {
         header: "Address",
-        accessorKey: "gender",
+        accessorKey: "address",
         //optionally, customize the cell render when this column is grouped. Make the text blue and pluralize the word
         GroupedCell: ({ cell, row }) => (
           <Box sx={{ color: "primary.main" }}>
@@ -60,17 +138,21 @@ const SupplierDeliveryTable = () => {
         ),
       },
       {
-        header: "Orders",
-        accessorKey: "state",
+        header: "Order",
+        accessorKey: "order",
+      },
+      {
+        header: "Status",
+        accessorKey: "status",
       },
       {
         header: "Amount",
-        accessorKey: "salary",
+        accessorKey: "amount",
         aggregationFn: "mean",
         //required to render an aggregated cell, show the average salary in the group
         AggregatedCell: ({ cell, table }) => (
           <>
-            Average by{" "}
+            Average{" "}
             {table.getColumn(cell.row.groupingColumnId ?? "").columnDef.header}:{" "}
             <Box sx={{ color: "success.main", fontWeight: "bold" }}>
               {cell.getValue()?.toLocaleString?.("en-US", {
@@ -97,7 +179,7 @@ const SupplierDeliveryTable = () => {
           <Stack>
             Average Amount:
             <Box color="warning.main">
-              {averageSalary?.toLocaleString?.("en-US", {
+              {averageAmount?.toLocaleString?.("en-US", {
                 style: "currency",
                 currency: "USD",
                 minimumFractionDigits: 0,
@@ -108,13 +190,13 @@ const SupplierDeliveryTable = () => {
         ),
       },
     ],
-    [averageSalary, maxAge],
+    [averageAmount, maxItems],
   );
 
   return (
     <MaterialReactTable
       columns={columns}
-      data={data}
+      data={tableData}
       enableColumnResizing
       enableGrouping
       enableStickyHeader
@@ -122,28 +204,30 @@ const SupplierDeliveryTable = () => {
       initialState={{
         density: "compact",
         expanded: true, //expand all groups by default
-        grouping: ["state"], //an array of columns to group by by default (can be multiple)
+        grouping: ["order"], //an array of columns to group by by default (can be multiple)
         pagination: { pageIndex: 0, pageSize: 20 },
-        sorting: [{ id: "state", desc: false }], //sort by state by default
+        sorting: [{ id: "order", desc: false }], //sort by state by default
       }}
       muiToolbarAlertBannerChipProps={{ color: "primary" }}
       muiTableContainerProps={{ sx: { maxHeight: 700 } }}
       positionActionsColumn="last"
       enableRowActions
       enableEditing
-      renderRowActionMenuItems={({ row, closeMenu }) => [
+      renderRowActionMenuItems={({ row, table, closeMenu }) => [
         <MenuItem
           key={1}
           onClick={() => {
-            console.info("View Profile", row);
+            table.setEditingRow(row);
+            console.info("Halt", row);
             closeMenu();
           }}
         >
-          View Profile
+          Halt
         </MenuItem>,
         <MenuItem
           key={2}
           onClick={() => {
+            handleDeleteRow(row);
             console.info("Remove", row);
             closeMenu();
           }}
