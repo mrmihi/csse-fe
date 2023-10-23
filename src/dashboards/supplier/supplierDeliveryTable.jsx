@@ -18,7 +18,7 @@ const SupplierDeliveryTable = () => {
   const columns = useMemo(
     () => [
       {
-        header: "First Name",
+        header: "Company",
         accessorKey: "firstName",
         enableGrouping: false, //do not let this column be grouped
       },
@@ -27,7 +27,7 @@ const SupplierDeliveryTable = () => {
         accessorKey: "lastName",
       },
       {
-        header: "Age",
+        header: "Items",
         accessorKey: "age",
         aggregationFn: "max", //show the max age in the group (lots of pre-built aggregationFns to choose from)
         //required to render an aggregated cell
@@ -44,13 +44,13 @@ const SupplierDeliveryTable = () => {
         ),
         Footer: () => (
           <Stack>
-            Max Age:
+            Max Items:
             <Box color="warning.main">{Math.round(maxAge)}</Box>
           </Stack>
         ),
       },
       {
-        header: "Gender",
+        header: "Address",
         accessorKey: "gender",
         //optionally, customize the cell render when this column is grouped. Make the text blue and pluralize the word
         GroupedCell: ({ cell, row }) => (
@@ -60,11 +60,11 @@ const SupplierDeliveryTable = () => {
         ),
       },
       {
-        header: "State",
+        header: "Orders",
         accessorKey: "state",
       },
       {
-        header: "Salary",
+        header: "Amount",
         accessorKey: "salary",
         aggregationFn: "mean",
         //required to render an aggregated cell, show the average salary in the group
@@ -95,7 +95,7 @@ const SupplierDeliveryTable = () => {
         ),
         Footer: () => (
           <Stack>
-            Average Salary:
+            Average Amount:
             <Box color="warning.main">
               {averageSalary?.toLocaleString?.("en-US", {
                 style: "currency",

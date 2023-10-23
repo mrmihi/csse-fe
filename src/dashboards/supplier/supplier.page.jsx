@@ -29,12 +29,12 @@ const Supplier = () => {
                           Orders
                         </TabsTrigger>
                         <TabsTrigger value="deliveries">Deliveries</TabsTrigger>
-                        <TabsTrigger value="live">Live</TabsTrigger>
+                        <TabsTrigger value="live">Summary</TabsTrigger>
                       </TabsList>
                       <div className="ml-auto mr-4">
                         <Button>
                           {/* <PlusCircledIcon className="mr-2 h-4 w-4" /> */}
-                          Add Orders
+                          Add Deliveries
                         </Button>
                       </div>
                     </div>
